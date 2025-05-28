@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Address {
+  id           String        @id @default(uuid())
+  city         String
+  state        String
+  number       String
+  neighborhood String
+  street       String
+  createdAt    DateTime      @default(now())
+  AddressList  AddressList[]
+}
+
+model Payment {
+  id            String         @id @default(uuid())
+  methodPayment MethodsPayment
+  Order         Order[]
+}
+
+enum MethodsPayment {
+  PIX
+  CREDIT_CARD
+  DEBIT_CARD
+  IN_CASH
+}
+
+model Product {
+  id              String         @id @default(uuid())
+  description     String
+  price           Decimal
+  name            String
+  image           String
+  preparationTime Int
+  createdAt       DateTime       @default(now())
+  ProductsList    ProductsList[]
+}
+
+model Order {
+  id           String         @id @default(uuid())
+  totalPrice   Decimal
+  status       StatusOrder
+  subtotal     Decimal
+  shippingRate Decimal
+  createdAt    DateTime       @default(now())
+  payment      Payment        @relation(fields: [paymentId], references: [id])
+  paymentId    String
+  ProductsList ProductsList[]
+  OrdersList   OrdersList[]
+}
+
+enum StatusOrder {
+  PENDING
+  CANCELED
+  DELIVERED
+  DELIVERING
+  PROCESSING
+}
+
+model ProductsList {
+  quantity  Int
+  subtotal  Decimal
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+  orderId   String
+  productId String
+
+  @@id([orderId, productId])
+}
+
+model User {
+  id          String        @id @default(uuid())
+  name        String
+  email       String
+  phone       String
+  password    String
+  createdAt   DateTime      @default(now())
+  AddressList AddressList[]
+  OrdersList  OrdersList[]
+}
+
+model AddressList {
+  user      User    @relation(fields: [userId], references: [id])
+  address   Address @relation(fields: [addressId], references: [id])
+  userId    String
+  addressId String
+
+  @@id([userId, addressId])
+}
+
+model OrdersList {
+  user    User   @relation(fields: [userId], references: [id])
+  order   Order  @relation(fields: [orderId], references: [id])
+  userId  String
+  orderId String
+
+  @@id([userId, orderId])
+}

@@ -78,7 +78,7 @@ model ProductsList {
 model User {
   id          String        @id @default(uuid())
   name        String
-  email       String
+  email       String        @unique
   phone       String
   password    String
   createdAt   DateTime      @default(now())

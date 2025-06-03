@@ -1,10 +1,16 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import {
   UserAuthDto,
   UserAuthResult,
   UserSignInDto,
+  UserSignUpDto,
 } from './dto/user-auth.dto';
 
 @Injectable()
@@ -56,5 +62,24 @@ export class AuthService {
       userId,
       email,
     };
+  }
+
+  async signUp(userSignUpDto: UserSignUpDto) {
+    if (!userSignUpDto) {
+      throw new BadRequestException('Dados inválidos!');
+    }
+
+    const existsUserEmail = await this.userService.findByEmail(
+      userSignUpDto.email,
+    );
+
+    if (existsUserEmail) {
+      throw new ConflictException({
+        message: 'O e-mail já está em uso',
+      });
+    }
+
+    const newUser = await this.userService.create(userSignUpDto);
+    return newUser;
   }
 }

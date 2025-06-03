@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
       global: true,
       secret: process.env?.JWT_SECRET as string,
       signOptions: {
-        expiresIn: '30s',
+        expiresIn: '1d',
       },
     }),
   ],

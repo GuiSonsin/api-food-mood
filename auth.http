@@ -2,16 +2,23 @@ POST http://localhost:3000/auth/sign-in
 Content-Type: application/json
 
 {
-  "email": "ricardo1234@gmail.com",
+  "email": "gui@gmail.com",
   "password": "1234"
 }
 
 ###
 
 GET http://localhost:3000/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYTY2MGM5OS1hM2FiLTQyODYtODkwNi1jZGIyMWZhMTkxZjciLCJlbWFpbCI6InJpY2FyZG8xMjM0QGdtYWlsLmNvbSIsImlhdCI6MTc0ODkxMDE1MSwiZXhwIjoxNzQ4OTEwMTgxfQ.e1eHz0XXe4308e7wgRyFsllv4kPgN-_mJf5DZ-L7e3k
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNmQ4ZDg5Zi0yOTMxLTQxODAtODdmNi1hYThkMjEzYWI3ZmMiLCJlbWFpbCI6Imd1aUBnbWFpbC5jb20iLCJpYXQiOjE3NDg5MTM0OTksImV4cCI6MTc0ODk5OTg5OX0.V3pzGvCQdyZ05jDdIb6ERSaRZTCvNk0n7vb8Ja4W2t4
 
 ###
 
-GET http://localhost:3000/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYTY2MGM5OS1hM2FiLTQyODYtODkwNi1jZGIyMWZhMTkxZjciLCJlbWFpbCI6InJpY2FyZG8xMjM0QGdtYWlsLmNvbSIsImlhdCI6MTc0ODkxMDg1NCwiZXhwIjoxNzQ4OTEwODg0fQ.--sHHfUwmzk2xQS_p63uSKdtR3GDANLf598sLmnpcI0
+POST http://localhost:3000/auth/sign-up
+Content-Type: application/json
+
+{
+  "email": "gui@gmail.com",
+  "name": "Guilherme",
+  "phone": "124335",
+  "password": "1234" 
+}

@@ -8,16 +8,16 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { Public } from 'src/constants/skip-auth';
+import { SkipAuth } from 'src/decorators/skip-auth.decorator';
 import { AuthService } from './auth.service';
-import { UserAuthDto } from './dto/user-auth.dto';
+import { UserAuthDto, UserSignUpDto } from './dto/user-auth.dto';
 import { AuthGuard } from './guards/auth.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Public()
+  @SkipAuth()
   @HttpCode(HttpStatus.OK)
   @Post('sign-in')
   login(@Body() userAuthDto: UserAuthDto) {
@@ -28,5 +28,11 @@ export class AuthController {
   @Get('me')
   getUserInfo(@Request() req) {
     return req.user;
+  }
+
+  @SkipAuth()
+  @Post('/sign-up')
+  signUp(@Body() userSignUpDto: UserSignUpDto) {
+    return this.authService.signUp(userSignUpDto);
   }
 }

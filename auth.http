@@ -1,0 +1,12 @@
+POST http://localhost:3000/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "ricardo1234@gmail.com",
+  "password": "1234"
+}
+
+###
+
+GET http://localhost:3000/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYTY2MGM5OS1hM2FiLTQyODYtODkwNi1jZGIyMWZhMTkxZjciLCJlbWFpbCI6InJpY2FyZG8xMjM0QGdtYWlsLmNvbSIsImlhdCI6MTc0ODkwOTU3NCwiZXhwIjoxNzQ4OTA5NjA0fQ.AxOJZj8y75YPDMzoqI-QZnd_NHm50siGBa736UIgn2A

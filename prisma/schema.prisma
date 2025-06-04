@@ -33,22 +33,31 @@ enum MethodsPayment {
 }
 
 model Product {
-  id              String         @id @default(uuid())
+  id              String   @id @default(uuid())
   description     String
-  price           Decimal
+  price           Float
   name            String
   image           String
   preparationTime Int
-  createdAt       DateTime       @default(now())
-  ProductsList    ProductsList[]
+  createdAt       DateTime @default(now())
+
+  categoryId   String
+  ProductsList ProductsList[]
+  category     Category       @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id      String    @id @default(uuid())
+  name    String
+  Product Product[]
 }
 
 model Order {
   id           String         @id @default(uuid())
-  totalPrice   Decimal
+  totalPrice   Float
   status       StatusOrder
-  subtotal     Decimal
-  shippingRate Decimal
+  subtotal     Float
+  shippingRate Float
   createdAt    DateTime       @default(now())
   payment      Payment        @relation(fields: [paymentId], references: [id])
   paymentId    String
@@ -66,7 +75,7 @@ enum StatusOrder {
 
 model ProductsList {
   quantity  Int
-  subtotal  Decimal
+  subtotal  Float
   order     Order   @relation(fields: [orderId], references: [id])
   product   Product @relation(fields: [productId], references: [id])
   orderId   String

@@ -10,9 +10,10 @@ datasource db {
 
 model Address {
   id           String        @id @default(uuid())
+  name         String
   city         String
   state        String
-  number       String
+  houseNumber  String
   neighborhood String
   street       String
   createdAt    DateTime      @default(now())

@@ -2,8 +2,8 @@ POST http://localhost:3000/auth/sign-in
 Content-Type: application/json
 
 {
-  "email": "gui@gmail.com",
-  "password": "1234"
+  "email": "teste@teste",
+  "password": "testeeeee"
 }
 
 ###
@@ -25,4 +25,5 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/product
+GET http://localhost:3000/order/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ODE1ZTJjYS1mYzljLTRmNWUtODI0NC1lYzBlNDhiNGRjMjIiLCJlbWFpbCI6InRlc3RlQHRlc3RlIiwiaWF0IjoxNzUwMjQ3NDI3LCJleHAiOjE3NTAzMzM4Mjd9.yqQ59Fm6hmPtLILEOdMYTayfs3YMp30N5rFqH-AUf4c

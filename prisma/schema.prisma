@@ -9,15 +9,16 @@ datasource db {
 }
 
 model Address {
-  id           String        @id @default(uuid())
+  id           String   @id @default(uuid())
   name         String
   city         String
   state        String
   houseNumber  String
   neighborhood String
   street       String
-  createdAt    DateTime      @default(now())
-  AddressList  AddressList[]
+  createdAt    DateTime @default(now())
+  User         User?    @relation(fields: [userId], references: [id])
+  userId       String?
 }
 
 model Payment {
@@ -63,7 +64,9 @@ model Order {
   payment      Payment        @relation(fields: [paymentId], references: [id])
   paymentId    String
   ProductsList ProductsList[]
-  OrdersList   OrdersList[]
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
 }
 
 enum StatusOrder {
@@ -86,30 +89,12 @@ model ProductsList {
 }
 
 model User {
-  id          String        @id @default(uuid())
-  name        String
-  email       String        @unique
-  phone       String
-  password    String
-  createdAt   DateTime      @default(now())
-  AddressList AddressList[]
-  OrdersList  OrdersList[]
-}
-
-model AddressList {
-  user      User    @relation(fields: [userId], references: [id])
-  address   Address @relation(fields: [addressId], references: [id])
-  userId    String
-  addressId String
-
-  @@id([userId, addressId])
-}
-
-model OrdersList {
-  user    User   @relation(fields: [userId], references: [id])
-  order   Order  @relation(fields: [orderId], references: [id])
-  userId  String
-  orderId String
-
-  @@id([userId, orderId])
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  phone     String
+  password  String
+  createdAt DateTime  @default(now())
+  orders    Order[]
+  addresses Address[]
 }

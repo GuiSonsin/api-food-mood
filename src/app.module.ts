@@ -7,9 +7,12 @@ import { AuthGuard } from './auth/guards/auth.guard';
 import { PrismaModule } from './prisma/prisma.module';
 import { ProductModule } from './product/product.module';
 import { UserModule } from './user/user.module';
+import { OrderModule } from './order/order.module';
+import { PaymentModule } from './payment/payment.module';
+import { AddressModule } from './address/address.module';
 
 @Module({
-  imports: [UserModule, PrismaModule, AuthModule, ProductModule],
+  imports: [UserModule, PrismaModule, AuthModule, ProductModule, OrderModule, PaymentModule, AddressModule],
   controllers: [AppController],
   providers: [
     AppService,

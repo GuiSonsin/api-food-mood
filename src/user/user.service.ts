@@ -28,6 +28,15 @@ export class UserService {
     return user;
   }
 
+  async findOneWithAuth(userId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+    return user;
+  }
+
   async findByEmail(email: string) {
     const user = await this.prisma.user.findUnique({
       where: {

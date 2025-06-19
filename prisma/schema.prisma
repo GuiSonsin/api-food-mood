@@ -19,6 +19,7 @@ model Address {
   createdAt    DateTime @default(now())
   User         User?    @relation(fields: [userId], references: [id])
   userId       String?
+  Order        Order[]
 }
 
 model Payment {
@@ -67,6 +68,9 @@ model Order {
 
   User   User?   @relation(fields: [userId], references: [id])
   userId String?
+
+  address   Address @relation(fields: [addressId], references: [id])
+  addressId String
 }
 
 enum StatusOrder {

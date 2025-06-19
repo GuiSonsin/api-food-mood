@@ -1,17 +1,24 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class OrderService {
   constructor(private prisma: PrismaService) {}
 
   async create(createOrderDto: CreateOrderDto, userId: string) {
+    const { productList, ...rest } = createOrderDto;
+
     const order = await this.prisma.order.create({
       data: {
-        ...createOrderDto,
+        ...rest,
         userId,
+        ProductsList: {
+          createMany: {
+            data: productList,
+          },
+        },
       },
     });
     return order;
@@ -31,21 +38,19 @@ export class OrderService {
     return orders;
   }
 
-  async findOne(id: string, userId: string) {
+  async findOne(id: string) {
     const order = await this.prisma.order.findUnique({
       where: {
         id,
-        userId,
       },
     });
     return order;
   }
 
-  async update(id: string, updateOrderDto: UpdateOrderDto, userId: string) {
+  async update(id: string, updateOrderDto: UpdateOrderDto) {
     const updatedOrder = await this.prisma.order.update({
       data: {
         ...updateOrderDto,
-        userId,
       },
       where: {
         id,

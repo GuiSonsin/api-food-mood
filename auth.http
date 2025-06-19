@@ -2,8 +2,8 @@ POST http://localhost:3000/auth/sign-in
 Content-Type: application/json
 
 {
-  "email": "teste@teste",
-  "password": "testeeeee"
+  "email": "rhv@gmail.com",
+  "password": "ricardo123"
 }
 
 ###
@@ -25,5 +25,36 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/order/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ODE1ZTJjYS1mYzljLTRmNWUtODI0NC1lYzBlNDhiNGRjMjIiLCJlbWFpbCI6InRlc3RlQHRlc3RlIiwiaWF0IjoxNzUwMjQ3NDI3LCJleHAiOjE3NTAzMzM4Mjd9.yqQ59Fm6hmPtLILEOdMYTayfs3YMp30N5rFqH-AUf4c
+GET http://localhost:3000/user/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOGVkYWI2OS05YTIyLTQzZDUtOTExMS03NTA2OGQwMmY5NGEiLCJlbWFpbCI6InJodkBnbWFpbC5jb20iLCJpYXQiOjE3NTAyODM0MzIsImV4cCI6MTc1MDM2OTgzMn0.NvwtgUBTTMj9j5WkIlOR8ec3htBtSquiXhYYkbAUMBc
+
+### 
+POST http://localhost:3000/order
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOGVkYWI2OS05YTIyLTQzZDUtOTExMS03NTA2OGQwMmY5NGEiLCJlbWFpbCI6InJodkBnbWFpbC5jb20iLCJpYXQiOjE3NTAyODM0MzIsImV4cCI6MTc1MDM2OTgzMn0.NvwtgUBTTMj9j5WkIlOR8ec3htBtSquiXhYYkbAUMBc
+Content-Type: application/json
+
+{
+  "totalPrice": 100,
+  "status": "PENDING",
+  "subtotal": 100,
+  "shippingRate": 10,
+  "paymentId": "538b9fb0-ca80-44a1-a8bd-88d6c9ae790e",
+  "addressId": "2d0b8e3c-13c8-4171-b918-af643ae08483",
+  "productList": [
+    {
+    "subtotal": 100,
+    "quantity": 1,
+    "productId": "099994a5-043a-4bc1-acbd-718965ef7229"
+  },
+  {
+    "subtotal": 100,
+    "quantity": 2,
+    "productId": "28773e21-1921-4397-9869-45c55b9faec8"
+  },
+  {
+    "subtotal": 100,
+    "quantity": 1,
+    "productId": "67fee2ac-63a9-438d-9cdc-db1a148eda18"
+  }
+  ]
+}

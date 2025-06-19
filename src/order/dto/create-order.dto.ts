@@ -4,4 +4,10 @@ export class CreateOrderDto {
   subtotal: number;
   shippingRate: number;
   paymentId: string;
+  addressId: string;
+  productList: {
+    productId: string;
+    quantity: number;
+    subtotal: number;
+  }[];
 }

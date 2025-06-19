@@ -1,17 +1,29 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class AddressService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createAddressDto: CreateAddressDto) {
+  async create(createAddressDto: CreateAddressDto, userId: string) {
     const address = await this.prisma.address.create({
-      data: createAddressDto,
+      data: {
+        ...createAddressDto,
+        userId,
+      },
     });
     return address;
+  }
+
+  async findAllByUserId(userId: string) {
+    const addresses = await this.prisma.address.findMany({
+      where: {
+        userId,
+      },
+    });
+    return addresses;
   }
 
   async findAll() {
@@ -39,11 +51,11 @@ export class AddressService {
   }
 
   async remove(id: string) {
-    await this.prisma.address.delete({
+    const address = await this.prisma.address.delete({
       where: {
         id,
       },
     });
-    return 'Endereço removido com sucesso!';
+    return address;
   }
 }
